@@ -1,0 +1,8 @@
+const path = require('path');
+
+module.exports = {
+  config: path.resolve('config', 'config.js'),//database.json chaged to config.js file to be created inside the config folder so we can use env
+  'models-path': path.resolve('db', 'models'),//this
+  'seeders-path': path.resolve('db', 'seeders'),//this
+  'migrations-path': path.resolve('db', 'migrations'),//and this folders will be created inside the db folder
+};
