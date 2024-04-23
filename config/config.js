@@ -9,4 +9,4 @@ module.exports = {//nao esquecer de adicionar molude.exports pra mudar de json p
     port: process.env.DB_PORT,
     dialect: "postgres",
   }
-}
+};

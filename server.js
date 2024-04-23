@@ -3,11 +3,9 @@ require('dotenv').config({ path: `${process.cwd()}/env` });
 const express = require('express');
 
 const authRouter = require('./route/authRoute.js');
-const { connection } = require('./postgresql.js');
 
 const app = express();
 
-connection();
 app.get('/', (req, res)=>{
     res.status(200).json({
         status: "Working",
