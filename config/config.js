@@ -2,11 +2,11 @@ require('dotenv').config({ path: `${process.cwd()}/env` });
 
 module.exports = {//nao esquecer de adicionar molude.exports pra mudar de json para js 
   development: {
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
+    username: 'postgres',
+    password: 'P4d48iv9!',
+    database: 'godzil',
+    host: 'localhost',
+    port: 5432,
     dialect: "postgres",
   }
-};
+}
