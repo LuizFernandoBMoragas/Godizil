@@ -29,7 +29,7 @@ const signup = async (req, res, next) =>{
         confirmPassword: body.confirmPassword,
     });
 
-    const result = await newUser.toJSON();
+    const result = newUser.toJSON();
 
     delete result.password;
     delete result.deletedAt;

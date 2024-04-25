@@ -33,7 +33,7 @@ module.exports = sequelize.define('user', {
         const hashPassword = bcrypt.hashSync(value, 10);
         this.setDataValue('password', hashPassword); 
       } else{
-        throw new ERROR ("Password and confirm password must be the same.")
+        console.log('Password need to be the same')
       }
     }//it will be encrypt the password before it goes to the db
   },
