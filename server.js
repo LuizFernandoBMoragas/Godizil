@@ -3,6 +3,7 @@ require('dotenv').config({ path: `${process.cwd()}/env` });
 const express = require('express');
 
 const authRouter = require('./route/authRoute.js');
+const catchAsync = require('./utils/catchAsync.js');
 
 const app = express();
 
@@ -17,14 +18,9 @@ app.get('/', (req, res)=>{
 
 app.use('/api/v1/auth', authRouter)
 
-app.use('*', async (req, res, next)=>{
-    return next(new Error('this is error!')); //for async we need to use the next function to handle the error.
-    // throw new Error('this is error!');
-    // res.status(404).json({
-    //     status: "Fail",
-    //     message: "Route not found"
-    // })
-})
+app.use('*', catchAsync(async (req, res, next)=>{
+    throw new Error ('this is errorr!')
+}))
 
 app.use((err, req, res, next)=>{
     res.status(404).json({
