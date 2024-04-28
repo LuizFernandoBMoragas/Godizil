@@ -17,10 +17,19 @@ app.get('/', (req, res)=>{
 
 app.use('/api/v1/auth', authRouter)
 
-app.use('*', (req, res)=>{
+app.use('*', async (req, res, next)=>{
+    return next(new Error('this is error!')); //for async we need to use the next function to handle the error.
+    // throw new Error('this is error!');
+    // res.status(404).json({
+    //     status: "Fail",
+    //     message: "Route not found"
+    // })
+})
+
+app.use((err, req, res, next)=>{
     res.status(404).json({
-        status: "Fail",
-        message: "Route not found"
+        status: 'Error',
+        message: err.message
     })
 })
 
