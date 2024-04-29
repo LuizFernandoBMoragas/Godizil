@@ -2,7 +2,8 @@
 const { Model, Sequelize, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 
-const sequelize = require('../../config/database')
+const sequelize = require('../../config/database');
+const serverError = require('../../utils/serverError');
 
 module.exports = sequelize.define('user', {
   id: {
@@ -33,7 +34,7 @@ module.exports = sequelize.define('user', {
         const hashPassword = bcrypt.hashSync(value, 10);
         this.setDataValue('password', hashPassword); 
       } else{
-        console.log('Password need to be the same')
+        throw new serverError('Password and confirm password need to be the same', 400)
       }
     }//it will be encrypt the password before it goes to the db
   },

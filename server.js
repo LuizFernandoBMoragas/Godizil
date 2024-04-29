@@ -11,17 +11,10 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', (req, res)=>{
-    res.status(200).json({
-        status: "Working",
-        Message: "Wohoo, the server is up and running"
-    });
-});
-
 app.use('/api/v1/auth', authRouter);
 
 app.use('*', catchAsync(async (req, res, next)=>{
-    throw new serverError ('this is errorr!', 404)
+    throw new serverError (`Can not find the ${req.originalUrl} on this server`, 404)
 }));
 
 app.use(globalErrorHandler);
