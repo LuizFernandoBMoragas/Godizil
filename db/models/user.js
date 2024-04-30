@@ -79,7 +79,7 @@ module.exports = sequelize.define('user', {
     type: DataTypes.VIRTUAL,
     set(value){
       if(this.password.length < 7){
-        throw new serverError('Password lenth must be grater than 7', 400);
+        throw new serverError('Password lenth must be grater than 7', 400)
       }
       if(value === this.password){
         const hashPassword = bcrypt.hashSync(value, 10);
