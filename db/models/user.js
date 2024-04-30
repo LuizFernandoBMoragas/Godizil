@@ -13,23 +13,74 @@ module.exports = sequelize.define('user', {
     type: DataTypes.INTEGER
   },
   userType: {
-    type: DataTypes.ENUM('0', '1', '2')
+    type: DataTypes.ENUM('0', '1', '2'),
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: 'userType cannot be null',
+      },
+      notEmpty: {
+        msg: 'userType cannot be empty',
+      },
+    },
   },
   firstName: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: 'firstName cannot be null',
+      },
+      notEmpty: {
+        msg: 'firstName cannot be empty',
+      },
+    },
   },
   lastName: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: 'lastName cannot be null',
+      },
+      notEmpty: {
+        msg: 'lastName cannot be empty',
+      },
+    },
   },
   email: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: 'email cannot be null',
+      },
+      notEmpty: {
+        msg: 'email cannot be empty',
+      },
+      isEmail: {
+        msg: 'Invalid email id',
+      }
+    },
   },
   password: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: 'password cannot be null',
+      },
+      notEmpty: {
+        msg: 'password cannot be empty',
+      },
+    },
   },
   confirmPassword: {
     type: DataTypes.VIRTUAL,
     set(value){
+      if(this.password.length < 7){
+        throw new serverError('Password lenth must be grater than 7', 400);
+      }
       if(value === this.password){
         const hashPassword = bcrypt.hashSync(value, 10);
         this.setDataValue('password', hashPassword); 

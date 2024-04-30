@@ -36,6 +36,9 @@ const sendErrorProd = (error, res) => {
 };
 
 const globalErrorHandler = (err, req, res, next) => {
+    if(err.name === 'SequelizeValidationError'){
+        err = new serverError(err.errors[0].message, 400);
+    }
     if(err.name === 'SequelizeUniqueConstraintError'){//Solve problem for when someone is trying to create another account with the same email
         err = new serverError(err.errors[0].message, 400);
     }
